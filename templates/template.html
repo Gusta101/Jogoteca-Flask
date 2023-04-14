@@ -7,7 +7,18 @@
     <title>Jogoteca</title>
 </head>
 <body>
-<div class="container mt-3">
+<div class="container mt-3 text-center">
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+            <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
     <div class="page-header text-center">
         <h1>{{ titulo }}</h1>
     </div>
