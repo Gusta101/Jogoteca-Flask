@@ -1,3 +1,10 @@
+"""
+ORM - Object-Relational Mapping
+ORM utilizada será o SQLAlchemy
+
+    Objetos de OOP ==> SQLAlchemy ==> Objetos de Banco de Dados
+"""
+
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -47,7 +54,7 @@ TABLES['Usuarios'] = ('''
 for tabela_nome in TABLES:
     tabela_sql = TABLES[tabela_nome]
     try:
-        print('Criando tabela {}'.format(tabela_nome), end='\n')
+        print('Criando tabela {}:'.format(tabela_nome), end=' ')
         cursor.execute(tabela_sql)
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
@@ -70,3 +77,22 @@ cursor.execute('select * from jogoteca.usuarios')
 print(' --------------- Usuários -------------- ')
 for user in cursor.fetchall():
     print(user[1])
+
+# inserindo jogos
+jogos_sql = 'INSERT INTO jogos (nome, categoria, console) VALUES (%s, %s, %s)'
+jogos = [
+    ('Tetris', 'Puzzle', 'Atari'),
+    ('God of War', ' Hack n Slash', 'PS2'),
+    ('Mortal Kombat', 'Luta', 'PS2'),
+    ('Valorant', 'FPS', 'PC'),
+    ('Crash Bandicoot', 'Hack n Slash', 'PS2'),
+    ('Need for Speed', 'Corrida', 'PS2'),
+]
+cursor.executemany(jogos_sql, jogos)
+
+cursor.execute('SELECT * FROM jogoteca.jogos')
+print(' --------------- Jogos -------------- ')
+for jogo in cursor.fetchall():
+    print(jogo[1])
+
+# comitando se não nada tem efeito
