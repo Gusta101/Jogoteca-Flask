@@ -1,24 +1,40 @@
 {% extends 'template.html' %}
 {% block conteudo %}
 
-    <form action="{{ url_for('criar') }}" method="POST">
-        <fieldset>
-            <div class="row">
-                <div class="form-group col">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" class="form-control">
-                </div>
-                <div class="form-group col">
-                    <label for="categoria">Categoria</label>
-                    <input type="text" id="categoria" name="categoria" class="form-control">
-                </div>
-                <div class="form-group col">
-                    <label for="console">Console</label>
-                    <input type="text" id="console" name="console" class="form-control">
-                </div>
+    <form action="{{ url_for('criar') }}" method="POST" enctype="multipart/form-data">
+        <div class="row mt-3">
+            <div class="col-4">
+                <figure class="img-thumbnail p-3">
+                    <img class="img-fluid" src="{{ url_for('imagem', nome_arquivo='capa_padrao.jpg') }}">
+                    <figcaption>
+                        <label class="fileContainer mt-2">
+                            Mudar Capa
+                            <input type="file" name="arquivo" accept=".jpg">
+                        </label>
+                    </figcaption>
+                </figure>
             </div>
-            <button type="submit" class="btn btn-primary btn-salvar mt-3 col-4 offset-4">Salvar</button>
-        </fieldset>
+
+            <div class="col">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+                        <input type="text" id="categoria" name="categoria" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="console">Console</label>
+                        <input type="text" id="console" name="console" class="form-control">
+                    </div>
+                </fieldset>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-salvar mt-3 col-4 offset-4">Salvar</button>
     </form>
 
 {% endblock %}
