@@ -1,13 +1,15 @@
 {% extends 'template.html' %}
 {% block conteudo %}
 
+    <a href="{{ url_for('novo') }}" class="btn btn-success w-auto">Adicionar novo</a>
+
     <table class="table table-striped table-responsive table-bordered mt-3">
         <thead class="thead-default ">
         <tr>
             <th>Nome</th>
             <th>Categoria</th>
             <th>Console</th>
-            <th></th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
